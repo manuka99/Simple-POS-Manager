@@ -1,5 +1,7 @@
 package com.spm.inventory.model;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -50,10 +52,10 @@ public class Product {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "category_id")
 	private Category category;
-	
+
 	@Transient
 	private String imageUrl;
-	
+
 	private String imageID;
 
 	private boolean manageStock;
@@ -63,6 +65,8 @@ public class Product {
 	private int remainingStockCount;
 
 	private int lowStockThreshold;
+
+	private Date productDate;
 
 	public String getProductID() {
 		return productID;
@@ -182,6 +186,14 @@ public class Product {
 
 	public void setImageID(String imageID) {
 		this.imageID = imageID;
+	}
+
+	public Date getProductDate() {
+		return productDate;
+	}
+
+	public void setProductDate(Date productDate) {
+		this.productDate = productDate;
 	}
 
 }

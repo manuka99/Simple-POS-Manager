@@ -23,10 +23,13 @@
 
 						<div id="contectChangeArea">
 
-
-
+							<div class="container mt-4 mb-4">
+								<h5 class="h2-responsive font-weight-bold">Edit Product -
+									[[${product.name}]]</h5>
+							</div>
 
 							<div class="row">
+
 								<div class="container">
 									<!--Carousel Wrapper-->
 									<div id="carousel-thumb"
@@ -143,16 +146,26 @@
 
 
 
-									<h2 class="h2-responsive product-name">
-
-
-
+									<h4 class="h4-responsive">
 										<div class="md-form">
 											<input th:value="${product.tax}" type="text" id="productTax"
 												class="form-control"> <label class="active"
 												for="productTax">Product Tax</label>
 										</div>
-									</h2>
+									</h4>
+
+
+									<br />
+									<h4 class="h4-responsive">
+										<span class="green-text">
+											<div class="md-form">
+												<input type="date" id="productDate"
+													th:value="${product.productDate}" class="form-control"
+													required> <label class="active" for="productDate">Product
+													Release date</label>
+											</div>
+										</span>
+									</h4>
 
 									<div class="card-body">
 										<div class="row">
@@ -181,9 +194,59 @@
 												</div>
 											</div>
 										</div>
+
+										<hr class="mb-4">
+
 										<div class="row">
 											<div class="text-center">
-												<hr class="mb-4">
+												<!-- Checked checkbox -->
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox" value=""
+														id="manageStockCheckBox"
+														th:checked="${product.manageStock}" /> <label
+														class="form-check-label" for="manageStockCheckBox">
+														Manage Stocks </label>
+												</div>
+											</div>
+										</div>
+
+										<div class="mt-5" id="manageStockDiv"
+											th:style="${product.manageStock ? 'display:block' : 'display:none'}">
+											<h4 class="h4-responsive">
+												<div class="md-form">
+													<input th:value="${product.initialStockCount}"
+														type="number" id="initialStockCount" class="form-control">
+													<label class="active" for="initialStockCount">Product
+														Initial Stock Count</label>
+												</div>
+											</h4>
+
+											<h4 class="h4-responsive">
+												<div class="md-form">
+													<input th:value="${product.remainingStockCount}"
+														type="number" id="remainingStockCount"
+														class="form-control"> <label class="active"
+														for="remainingStockCount">Product Remaining Stock
+														Count</label>
+												</div>
+											</h4>
+
+											<h4 class="h4-responsive">
+												<div class="md-form">
+													<input th:value="${product.lowStockThreshold}"
+														type="number" id="lowStockThreshold" class="form-control">
+													<label class="active" for="lowStockThreshold">Low
+														Stock Threshold</label>
+												</div>
+											</h4>
+										</div>
+
+										<hr class="mb-4">
+										<div class="row">
+											<div class="text-center">
+												<button type="button" id="hidden-cancel"
+													class="btn btn-secondary" data-dismiss="modal">Reset
+													Form</button>
 												<button id="updatingBtn" style="display: none"
 													class="btn btn-primary" type="button" disabled>
 													<span class="spinner-border spinner-border-sm"
@@ -286,6 +349,7 @@
 				var name = $('#productName').val();
 				var description = $('#productDescription').val();
 				var portion = $('#productPortion').val();
+				var productDate = $('#productDate').val();
 				var price = $('#productPrice').val();
 				var tax = $('#productTax').val();
 				var CatergoryID = $("#productCategorySelect option:selected")
@@ -295,16 +359,27 @@
 
 				console.log(selectedOption);
 
+				var manageStock = $('#manageStockCheckBox').is(':checked');
+				var initialStockCount = $('#initialStockCount').val();
+				var remainingStockCount = $('#remainingStockCount').val();
+				var lowStockThreshold = $('#lowStockThreshold').val();
+
 				var fd = new FormData();
 				fd.append('name', name);
 				fd.append('description', description);
 				fd.append('portion', portion);
 				fd.append('price', price);
 				fd.append('tax', tax);
+				fd.append('productDate', productDate);
 				fd.append('imageID', imageID);
 				fd.append('active', selectedOption);
 				fd.append('productID', productID);
 				fd.append('categoryID', CatergoryID);
+				//stock
+				fd.append('manageStock', manageStock);
+				fd.append('initialStockCount', initialStockCount);
+				fd.append('remainingStockCount', remainingStockCount);
+				fd.append('lowStockThreshold', lowStockThreshold);
 
 				if ($('#productImage').get(0).files.length != 0) {
 
@@ -397,6 +472,13 @@
 				})
 
 			};
+
+			$("#manageStockCheckBox").change(function() {
+				if ($(this).prop('checked'))
+					$('#manageStockDiv').slideDown();
+				else
+					$('#manageStockDiv').slideUp();
+			});
 		</script>
 
 

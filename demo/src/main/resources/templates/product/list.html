@@ -91,11 +91,14 @@
 
 
 							<div th:if="${category != null}">
-								<h3 class="font-weight-bold font-italic h2-responsive product-name">${category.name}</h3>
+								<h3
+									class="font-weight-bold font-italic h2-responsive product-name">${category.name}</h3>
 							</div>
 
 							<div th:if="${category == null}">
-								<h3 class="font-weight-bold font-italic h2-responsive product-name">All Products</h3>
+								<h3
+									class="font-weight-bold font-italic h2-responsive product-name">All
+									Products</h3>
 							</div>
 
 
@@ -134,7 +137,10 @@
 											<td>[[${product.portion}]]</td>
 											<td>[[${product.price}]]</td>
 											<td>[[${product.tax}]]</td>
-											<td>[[${product.active}]]</td>
+											<td><i th:if="${product.active}"
+												class="far fa-check-circle text-success fa-2x"></i> <i
+												th:if="!${product.active}"
+												class="fas fa-times text-danger fa-2x"></i></td>
 										</tr>
 									</tbody>
 									<tfoot class="bg42a5f5 blue lighten-1">
@@ -161,6 +167,12 @@
 									<div class="modal-dialog modal-lg" role="">
 										<div class="modal-content">
 											<div class="modal-body">
+
+												<div class="container mt-2 mb-4">
+													<h5 class="h2-responsive font-weight-bold">New Product
+														Details</h5>
+												</div>
+
 												<div class="row">
 													<div class="container">
 														<!--Carousel Wrapper-->
@@ -183,7 +195,8 @@
 														</div>
 														<!--/.Carousel Wrapper-->
 													</div>
-													<form onsubmit="addNewProductDetails()" class="container">
+													<form onsubmit="addNewProductDetails()" class="container"
+														style="display: flex; flex-direction: column; grid-column-gap: 8px">
 														<h2 class="h2-responsive product-name">
 
 															<div class="md-form">
@@ -202,24 +215,21 @@
 																	<input type="number" id="AddNewproductPrice"
 																		class="form-control" required> <label
 																		class="active" for="AddNewproductPrice">Product
-																		Price</label>
+																		Price (LKR)</label>
 																</div>
 															</span>
 														</h4>
-
 														<h2 class="h2-responsive product-name">
-
-
-
 															<div class="md-form">
-																<input type="text" id="AddNewproductDescription"
-																	class="form-control" required> <label
-																	class="active" for="AddNewproductDescription">Product
+																<label class="active" for="AddNewproductDescription">Product
 																	Description</label>
 															</div>
-
-
-
+														</h2>
+														<h2 class="h2-responsive product-name">
+															<div class="md-form">
+																<textarea type="text" id="AddNewproductDescription"
+																	class="form-control" required></textarea>
+															</div>
 														</h2>
 														<h4 class="h4-responsive">
 															<span class="green-text">
@@ -227,7 +237,20 @@
 																	<input type="text" id="AddNewproductPortion"
 																		class="form-control" required> <label
 																		class="active" for="AddNewproductPortion">Product
-																		Portion</label>
+																		Portion (Servings)</label>
+																</div>
+
+
+															</span>
+														</h4>
+
+														<h4 class="h4-responsive">
+															<span class="green-text">
+																<div class="md-form">
+																	<input type="date" id="AddNewproductDate"
+																		class="form-control" required> <label
+																		class="active" for="AddNewproductPortion">Product
+																		Release date</label>
 																</div>
 
 
@@ -241,7 +264,7 @@
 																<input type="number" id="AddNewproductTax"
 																	class="form-control" required> <label
 																	class="active" for="AddNewproductTax">Product
-																	Tax</label>
+																	Tax (LKR)</label>
 															</div>
 
 
@@ -282,6 +305,9 @@
 																	<hr class="mb-4">
 																	<button type="button" id="hidden-cancel"
 																		class="btn btn-secondary" data-dismiss="modal">Close</button>
+																	<button type="button" id="hidden-cancel"
+																		class="btn btn-secondary" data-dismiss="modal">Reset
+																		Form</button>
 																	<button class="btn btn-primary" type="submit">Add
 																		new product</button>
 																</div>
@@ -387,6 +413,7 @@
 				var description = $('#AddNewproductDescription').val();
 				var portion = $('#AddNewproductPortion').val();
 				var price = $('#AddNewproductPrice').val();
+				var productDate = $('#AddNewproductDate').val();
 				var tax = $('#AddNewproductTax').val();
 				var categoryID = $(
 						"#AddNewProductCategorySelect option:selected").val();
@@ -409,6 +436,7 @@
 				fd.append('description', description);
 				fd.append('portion', portion);
 				fd.append('categoryID', categoryID);
+				fd.append('productDate', productDate);
 				fd.append('price', price);
 				fd.append('tax', tax);
 				fd.append('active', selectedOption);
@@ -462,6 +490,23 @@
 			};
 
 			function deleteProduct() {
+				Swal.fire({
+				  title: 'Are you sure?',
+				  text: "You won't be able to revert this!",
+				  icon: 'warning',
+				  showCancelButton: true,
+				  confirmButtonColor: '#3085d6',
+				  cancelButtonColor: '#d33',
+				  confirmButtonText: 'Yes, delete it!'
+				}).then((result) => {
+				  if (result.isConfirmed) {
+					  deleteProductAPI();
+				  }
+				})
+
+			}
+			
+			function deleteProductAPI() {
 				var ch_list = new Array();
 				$("input:checkbox[type=checkbox]:checked").each(function() {
 					ch_list.push($(this).val());
@@ -485,6 +530,11 @@
 						//jQuery("#messages").load(
 						//location.href + " #messages > *");
 						listFoodByCategory();
+						Swal.fire(
+							      'Deleted!',
+							      'Selected entries have been deleted.',
+							      'success'
+							    )
 
 					},
 					error : function(jqXHR, textStatus, errorThrown) {

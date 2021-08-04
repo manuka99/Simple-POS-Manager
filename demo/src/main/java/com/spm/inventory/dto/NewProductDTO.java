@@ -1,12 +1,12 @@
 package com.spm.inventory.dto;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.UUID;
 import org.springframework.web.multipart.MultipartFile;
 import com.spm.inventory.model.Category;
 import com.spm.inventory.model.Product;
 import com.spm.inventory.util.FileUploadUtil;
-
 
 /*
  * Created by Manuka Yasas (IT19133850)
@@ -38,6 +38,8 @@ public class NewProductDTO {
 	private int lowStockThreshold;
 
 	private String categoryID;
+
+	private Date productDate;
 
 	private MultipartFile image;
 
@@ -163,20 +165,31 @@ public class NewProductDTO {
 		product.setRemainingStockCount(this.remainingStockCount);
 		product.setLowStockThreshold(this.lowStockThreshold);
 		product.setCategory(new Category(this.categoryID));
+		product.setProductDate(this.productDate);
+
+		System.out.println(this.productDate);
 		
-		if(this.image != null) {
-	        try {
-	        	String filename = this.image.getOriginalFilename();
-	        	String extension = filename.substring(filename.lastIndexOf("."));
-	        	String newName = UUID.randomUUID().toString().replaceAll("-", "").concat(extension);
+		if (this.image != null) {
+			try {
+				String filename = this.image.getOriginalFilename();
+				String extension = filename.substring(filename.lastIndexOf("."));
+				String newName = UUID.randomUUID().toString().replaceAll("-", "").concat(extension);
 				FileUploadUtil.saveFile("uploads/public/products", newName, this.image);
 				product.setImageID(newName);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return product;
+	}
+
+	public Date getProductDate() {
+		return productDate;
+	}
+
+	public void setProductDate(Date productDate) {
+		this.productDate = productDate;
 	}
 
 }
