@@ -2,10 +2,15 @@ package com.spm.order.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name="TBL_ITEM")
@@ -14,6 +19,7 @@ public class ItemEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+	
 	
     @Column(name = "itemName")
     private String productName;
@@ -26,6 +32,11 @@ public class ItemEntity {
     
     @Column(name="tot")
     private float tot;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name="orderID")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private orderEntity order;
 
 	public long getId() {
 		return id;
@@ -66,4 +77,14 @@ public class ItemEntity {
 	public float getTot() {
 		return uprice * qty;
 	}
+	
+    
+	public orderEntity getOrder() {
+		return order;
+	}
+
+	public void setOrder(orderEntity order) {
+		this.order = order;
+	}
+
 }
