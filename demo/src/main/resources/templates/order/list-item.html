@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.w3.org/1999/xhtml"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	layout:decorator="~{layouts/panel/layout.html}">
+<head>
+<meta charset="ISO-8859-1">
+<title>Purchase Order</title>
+    <style>
+        body {
+            font-family: Georgia, Arial, Helvetica, sans-serif;
+            background-color: white;
+            border: 3px solid gainsboro;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            margin: 50px;
+        }
+        *{
+            box-sizing: border-box;
+        }
+        .container {
+            max-width: 80%;
+            margin : auto;
+            position: center;
+            padding: 15px;
+            border: none;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+
+
+
+        input, textarea, select{
+            padding: 4px;
+            margin-top: 20px;
+            margin-left: 10px;
+            margin-right: 15px;
+            border-radius: 5px;
+        }
+
+        .btnAdd{
+            font-size: 12px;
+            padding: 10px;
+            border: none;
+            margin-right: 10px;
+            font-family: Georgia;
+            font-weight: bold;
+        }
+
+        table {
+            margin : auto;
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 90%;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+
+        }
+
+        th, td {
+            text-align: center;
+            padding: 16px;
+        }
+
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
+
+        .btnDelete{
+            background-color: red;
+            font-size: 12px;
+            padding: 10px;
+            border: none;
+            font-family: Georgia;
+            font-weight: bold;
+        }
+
+
+        .totContainer{
+            margin-top: 20px;
+
+        }
+        .inputD{
+            padding: 0;
+            margin: 0;
+        }
+        h4{
+            margin:3px;
+        }
+        .btnAll{
+            font-size: 12px;
+            padding: 20px;
+            margin-top:20px;
+            border: none;
+        }
+
+        #modal1, #modal3{
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 30%;
+            top: 25%;
+            overflow: auto;
+            border: none;
+            background-color: #ccccb3;
+            text-align: center;
+            padding: 50px;
+        }
+
+        #modal2{
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 25%;
+            top: 10%;
+            overflow: auto;
+            border: none;
+            background-color: #ccccb3;
+            text-align: center;
+            padding: 50px;
+        }
+
+        #container3 {
+            max-width: 80%;
+            display: none;
+            margin : auto;
+            position: fixed;
+            z-index: 1;
+            left: 19%;
+            top: 25%;
+            overflow: auto;
+            border: none;
+            background-color: #ccccb3;
+            text-align: center;
+            padding: 50px;
+        }
+        h5{
+            text-align: left;
+        }
+        #modal4{
+            margin: auto;
+            width: 50%;
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 25%;
+            top: 10%;
+            overflow: auto;
+            border: none;
+            background-color: #ccccb3;
+            text-align: center;
+            padding: 50px;
+        }
+
+        hr{
+            margin-bottom: 30px;
+        }
+
+        .tableP{
+            margin-top: 40px;
+        }
+
+        .btnAdd{
+            display: inline-block;
+        }
+   </style>
+</head>
+<body>
+<div layout:fragment="content">
+<h2 style="text-align: center; font-style: italic">Purchase Order</h2>
+<hr>
+<div class="container">
+    <form action="#" th:action=@{createItem} th:object="${item}" method = "post" style="width: 100%">
+
+        <label for="name"> Product Name</label>
+        <input type="text" th:field="*{productName}" id="name" style="width: 30%">
+
+        <label for="qty">Quality</label>
+        <input type="Number" th:field="*{qty}" id="qty" style="width: 10%">
+
+        <label for="uprice">Unit Price </label>
+        <input type="text" th:field="*{uprice}" id="uprice" style="width: 10%">
+
+        <div class="btnAdd">
+            <button style="background-color: cornflowerblue" name="add" class="btnAdd" style="margin-right: 5px">Add</button>
+            <button style="background-color: bisque" name="add" class="btnAdd">Clear</button>
+        </div>
+	<input type="hidden" id="id" th:field="*{id}">
+    </form>
+</div>
+<div class="tableP">
+    <table>
+        <tr>
+            <th>Qty</th>
+            <th>Product Name</th>
+            <th>Unit Price</th>
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <td> 3 </td>
+            <td>Books</td>
+            <td>60.00</td>
+            <td>180.00</td>
+            <td>
+                <button class="btnDelete">Delete</button>
+                <button style="background-color: cornflowerblue" class="btnDelete" id="btn2" onclick="function5()">Edit</button>
+            </td>
+        </tr>
+        <tr>
+            <td> 5 </td>
+            <td>Pens</td>
+            <td>10.00</td>
+            <td>60.00</td>
+            <td>
+                <button class="btnDelete" id="btn1" onclick="function1()">Delete</button>
+                <button style="background-color: cornflowerblue" class="btnDelete" id="btnE" onclick="function5()">Edit</button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="totContainer">
+    <h4>SubTotal : 240.00</h4>
+    <h4>Discount : <input class="inputD"type="text" style="width: 2%">%</h4>
+    <h4>Total : 240.00</h4>
+    <h5>Customer E-mail: <input class="inputD"type="email" style="width: 30%"></h5>
+    <h5>Note : <textarea class="inputD"type="text" style="width: 30%"></textarea></h5>
+
+</div>
+
+<div class="btnAll1">
+    <button class="btnAll" style="background-color: green" onclick="function2()"> Process </button>
+    <button class="btnAll" style="background-color: red" onclick="function3()"> Abort </button>
+    <button class="btnAll" style="background-color: dimgrey" onclick="function4()"> Recall </button>
+    <button class="btnAll" style="background-color: cornflowerblue"> Transaction </button>
+</div>
+
+<div class="Deleten" id="modal1">
+    <p>Are you sure you want to delete this item</p>
+    <button class="btnAll" style="background-color: green">Confirm</button>
+    <button class="btnAll" style="background-color: red">Close</button>
+</div>
+
+<div class="Deleten" id="modal3">
+    <p>Are you sure you want to abort this item</p>
+    <button class="btnAll" style="background-color: green">Confirm</button>
+    <button class="btnAll" style="background-color: red">Close</button>
+</div>
+
+
+
+<div id="modal2">
+
+    <h3>Complete Sale</h3>
+    <h5>Total : </h5>
+    <h5>Payments : </h5>
+    <h5> Balance : </h5>
+    <h5>Change : </h5>
+
+    <table style="background-color: gainsboro">
+        <tr>
+            <th>Method</th>
+            <th>Amount</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <td style="background-color: gainsboro">
+                <select style="background-color: gainsboro">
+                    <option>Cash</option>
+                    <option>Credit</option>
+                    <option>Cheque</option>
+                    <option>Deposite</option>
+                </select>
+            </td>
+            <td style="background-color: gainsboro">$ <input type="text" style="width: 20%"></td>
+        </tr>
+        <tr>
+            <td> Tendered : </td>
+        </tr>
+        <tr>
+            <td style="background-color: gainsboro"> Change :</td>
+        </tr>
+    </table>
+    <button class="btnAll" style="background-color: #2eb82e">Complete</button>
+    <button class="btnAll" style="background-color: #0080ff">Add Order</button>
+    <button class="btnAll" style="background-color: #e62e00">Cancel</button>
+</div>
+
+<div id="modal4">
+
+    <h3>Transaction Details</h3>
+    <table style="background-color: gainsboro; text-align: left;">
+        <tr>
+            <td style="width: 40%; text-align: left;"> Status : </td>
+            <td style="width: 40%; text-align: left;"> Process DT : </td>
+        </tr>
+        <tr>
+            <td style="width: 40%; text-align: left;"> ID : </td>
+            <td style="width: 40%; text-align: left;"> User : </td>
+        </tr>
+        <tr>
+            <td style="width: 40%; text-align: left;" > Ref :  </td>
+            <td style="width: 40%; text-align: left;"> Sales DT : </td>
+        </tr>
+        <tr>
+            <td> Note : <textarea> </textarea></td>
+        <td>
+            <button class="btnAll" style="background-color: #2eb82e">Complete</button>
+            <button class="btnAll" style="background-color: #e62e00">Remove</button>
+            <button class="btnAll" style="background-color: #0080ff">Print</button>
+         </td>
+        </tr>
+        <tr>
+            <td><button class="btnAll" style="background-color: #3333cc">Save</button></td>
+        </tr>
+
+    </table>
+    <button class="btnAll" style="background-color: darkgrey">Details</button>
+    <button class="btnAll" style="background-color: darkgrey">Item</button>
+    <button class="btnAll" style="background-color: darkgrey">Payments</button>
+    <button class="btnAll" style="background-color: darkgrey">Close</button>
+</div>
+<div id="container3">
+    <form style="width: 100%">
+
+        <label for="name"> Product Name</label>
+        <input type="text" id="name1" style="width: 30%">
+
+        <label for="qty">Quality</label>
+        <input type="Number" id="qty1" style="width: 10%">
+
+        <label for="uprice">Unit Price </label>
+        <input type="text" id="uprice1" style="width: 10%">
+
+        <button name="add" class="btnAdd">Save</button>
+
+    </form>
+</div>
+</div>
+<script>
+    function function1(){
+        document.getElementById("modal1").style.display = 'block';
+    }
+    function function2(){
+        document.getElementById("modal2").style.display = 'block';
+    }
+    function function3(){
+        document.getElementById("modal3").style.display = 'block';
+    }
+    function function4(){
+        document.getElementById("modal4").style.display = 'block';
+    }
+    function function5(){
+        document.getElementById("container3").style.display = 'block';
+    }
+
+</script>
+</body>
+</html>
