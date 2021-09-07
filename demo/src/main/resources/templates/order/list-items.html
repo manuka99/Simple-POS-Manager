@@ -1,10 +1,498 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+	<!-- Google Fonts -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+	<!-- Bootstrap core CSS -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Material Design Bootstrap -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+	<!-- JQuery -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!-- Bootstrap tooltips -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+	<!-- Bootstrap core JavaScript -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+	<!-- MDB core JavaScript -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+	
+	    <style>
+        body {
+            font-family: Georgia, Arial, Helvetica, sans-serif;
+            background-color: white;
+            border: 3px solid gainsboro;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            margin: 50px;
+        }
+        *{
+            box-sizing: border-box;
+        }
+        .container {
+            max-width: 80%;
+            margin : auto;
+            position: center;
+            padding: 15px;
+            border: none;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+
+
+
+        input, textarea, select{
+            padding: 4px;
+            margin-top: 20px;
+            margin-left: 10px;
+            margin-right: 15px;
+            border-radius: 5px;
+        }
+
+        .btnAdd{
+            font-size: 12px;
+            padding: 10px;
+            border: none;
+            margin-right: 10px;
+            font-family: Georgia;
+            font-weight: bold;
+        }
+
+        table {
+            margin : auto;
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 90%;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+
+        }
+
+        th, td {
+            text-align: center;
+            padding: 16px;
+        }
+
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
+
+        .btnDelete{
+            background-color: red;
+            font-size: 12px;
+            padding: 10px;
+            border: none;
+            font-family: Georgia;
+            font-weight: bold;
+        }
+
+
+        .totContainer{
+            margin-top: 20px;
+
+        }
+        .inputD{
+            padding: 0;
+            margin: 0;
+        }
+        h4{
+            margin:3px;
+        }
+        .btnAll{
+            font-size: 12px;
+            padding: 20px;
+            margin-top:20px;
+            border: none;
+        }
+
+        #modal1, #modal3{
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 30%;
+            top: 25%;
+            overflow: auto;
+            border: none;
+            background-color: #ccccb3;
+            text-align: center;
+            padding: 50px;
+        }
+
+        #modal2{
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 25%;
+            top: 10%;
+            overflow: auto;
+            border: none;
+            background-color: #ccccb3;
+            text-align: center;
+            padding: 50px;
+        }
+
+        #container3 {
+            max-width: 80%;
+            display: none;
+            margin : auto;
+            position: fixed;
+            z-index: 1;
+            left: 19%;
+            top: 25%;
+            overflow: auto;
+            border: none;
+            background-color: #ccccb3;
+            text-align: center;
+            padding: 50px;
+        }
+        h5{
+            text-align: left;
+        }
+        #modal4{
+            margin: auto;
+            width: 50%;
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 25%;
+            top: 10%;
+            overflow: auto;
+            border: none;
+            background-color: #ccccb3;
+            text-align: center;
+            padding: 50px;
+        }
+
+ #display, #display2{
+            margin: auto;
+            width: 50%;
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 25%;
+            top: 10%;
+            overflow: auto;
+            border: none;
+            background-color: white;
+            text-align: center;
+            padding: 50px;
+        }
+        hr{
+            margin-bottom: 30px;
+        }
+
+        .tableP{
+            margin-top: 40px;
+        }
+
+        .btnAdd{
+            display: inline-block;
+        }
+        
+        span{
+        font-family: Georgia, Arial, Helvetica, sans-serif;
+        font-size:20px;
+        font-weight : bold;
+        }
+   </style>
 </head>
 <body>
+     <!--/Main layout-->
+					
+<h2>Purchase Order</h2>
+<hr>  
+<div class="container">
+  <form action="/createItem" th:object="${Item}" method="post">
 
+        <label for="name"> Product Name</label>
+        <input type="text" name="productName" id="name">
+
+        <label for="qty">Quality</label>
+        <input type="Number" name="qty" id="qty">
+
+        <label for="uprice">Unit Price </label>
+        <input type="text" name="uprice" id="uprice">
+
+        <div class="btnAdd">
+            <button type="submit" name="add" class="btnAdd">Add</button>
+            <button class="btnAdd">Clear</button>
+        </div>
+
+    </form>
+</div>
+	
+			<div th:swith="${item}" class="container my-5">
+					<div class="col-md-10">
+						<h6 th:if="${items == null}" >Add items!</h6>
+						<div >
+							<table id="table" class="table table-striped table-responsive-md">
+								<thead>
+									<tr>
+										<th>Product Name</th>
+										<th>Qty</th>
+										<th>Unit Price</th>
+										<th>Price</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="item :${items}">	
+										<td th:text="${item.productName}"></td>
+										<td th:text="${item.qty}"></td>
+										<td th:text="${item.uprice}"></td>
+										<td th:text="${item.getTot()}" class="tot"> </td>
+										<td>
+										<a class="btn btn-primary" th:onclick="function5()"> <i class="fa fa-times ml-8"></i>
+										</a>
+										<a class="btn btn-danger" th:onclick="function1()"> <i class="fa fa-times ml-8"></i>
+										</a>
+										<div class="Deleten" id="modal1">
+										    <p>Are you sure you want to delete this item?</p>
+										    <a th:href="@{'/delete?id=' + ${item.id}}" class="btn btn-success" >Confirm</a>
+										    <a class="btn btn-danger" th:onclick="function6()">Cancel</a>
+										</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				
+<div id="container3">
+<table id="table" class="table table-striped table-responsive-md">
+								<thead>
+									<tr>
+										<th>Product Name</th>
+										<th>Qty</th>
+										<th>Unit Price</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="item :${items}">	
+										<td th:text="${item.productName}"></td>
+										<td th:text="${item.qty}"></td>
+										<td th:text="${item.uprice}"></td>
+									</tr>
+									<tr>
+									<td>
+										
+										<a class="btn btn-danger" th:onclick="function8()">Cancel</a>
+									</td>
+									</tr>	
+								</tbody>
+							</table>
+
+</div>				
+				
+<div class="container">
+	<span> Sub Total  &nbsp;&nbsp;&nbsp;  : <span id="subtot"> </span></span>
+    <span><br>Discount &nbsp;&nbsp;&nbsp; :<input type="number" id="chDiscount"></span>
+    <span><br>Net Total  &nbsp;&nbsp;&nbsp;&nbsp; :  <span id="result"></span></span>
+</div>
+<div id="display2">
+	<span> Sub Total  &nbsp;&nbsp;&nbsp;  : <span id="subtot"> </span></span>
+    <span><br>Net Total  &nbsp;&nbsp;&nbsp;&nbsp; :  <span id="result"></span></span>
+          <button class="btn btn-danger" onclick="function15()">Close</button>
+</div>
+ 
+<div class="btnAll1">
+    <button class="btn btn-success" onclick="function2()"> Process </button>
+	<button class="btn btn-warning" onclick="function3()"> Abort </button>
+    <button class="btn btn-secondary" onclick="function4()"> Recall </button>
+</div>
+
+<div id="modal2">
+  <form action="/createBook" th:object="${book}" method="post">
+	<label>Customer E-mail: </label><br>
+	<input class="inputD" type="email" name="email"><br>
+	
+    <label> Note : </label> <br>
+     <textarea class="inputD" name="note"></textarea> <br>
+     
+    <label>Payment Options : </label> <br>
+    <select name="option"> <br> 
+    			<option > </option>
+                <option value="pay_Now">Pay Now</option>
+                <option value="pay_later">Pay later</option>
+    </select> <br>
+
+    <button class="btn btn-success" type="submit">Proceed</button> <br>
+    <a class="btn btn-danger" th:onclick="function9()">Cancel</a>
+
+    </form>
+</div>
+
+<div class="Deleten" id="modal3">
+    <p>Are you sure you want to abort this Order?</p>
+    <button class="btn btn-success">Confirm</button>
+    <button class="btn btn-danger" onclick="function10()">Close</button>
+</div>
+
+<div id="modal4">
+
+    <h3>Transaction Details</h3>
+    <table style="background-color: gainsboro; text-align: left;">
+        <tr>
+            <td> Status : Processing</td>
+            <td> Process DT : <span id="date"></span> </td>
+        </tr>
+        <tr>
+            <td> Ref : 0001  </td>
+            <td> Sales DT : <span id="date1"></span> </td>
+        </tr>
+        <tr>
+            <td>  </td>
+        <td>
+            <button class="btnAll" style="background-color: #2eb82e">Complete</button>
+            <button class="btnAll" style="background-color: #0080ff">Print</button>
+         </td>
+        </tr>
+    </table>
+    <a class="btn btn-success" onclick="function11()">Items </a>
+    <a class="btn btn-secondary" onclick="function14()">Payments </a>
+    <a class="btn btn-danger" onclick="function13()">Close </a>
+</div>
+
+<div id="display">
+<table id="table" class="table table-striped table-responsive-md">
+								<thead>
+									<tr>
+										<th>Product Name</th>
+										<th>Qty</th>
+										<th>Unit Price</th>
+										<th>Total Price</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="item :${items}">	
+										<td th:text="${item.productName}"></td>
+										<td th:text="${item.qty}"></td>
+										<td th:text="${item.uprice}"></td>
+										<td th:text="${item.tot}"></td>
+									</tr>
+									<tr>
+										<td><span> Sub Total  &nbsp;&nbsp;&nbsp;  : </span></td>
+										<td><span id="subtot1"> </span></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>	
+  	  									<td> <span><br>Discount &nbsp;&nbsp;&nbsp; :</span></td>
+  	  									<td> <span id="printdis"></span></td>
+  	  									<td></td>
+										<td></td>
+									</tr>
+									<tr>	
+  						  				<td> <span><br>Net Total  &nbsp;&nbsp;&nbsp;&nbsp; : </span> </td>
+  						  				<td> <span id="result1"></span></td>
+  						  				<td></td>
+										<td></td>
+									</tr>
+									<tr>
+									<td></td>
+									<td>
+										  <button class="btn btn-danger" onclick="function12()">Close</button>
+									</td> 
+									<td></td>
+									<td></td>
+									</tr>	
+								</tbody>
+							</table>
+</div>				
+
+
+<script>
+
+//getDate
+const today = new Date();
+const d = String(today.getDate());
+const m = String(today.getMonth());
+const y = String(today.getFullYear());
+document.getElementById("date").innerHTML = d + '/' + m + '/' + y;
+document.getElementById("date1").innerHTML = d + '/' + m + '/' + y;
+
+ //Calculate_subtotal
+ 
+ calSubTot();
+	function calSubTot(){
+		var table = document.getElementById("table"), sumVal = 0;
+	 	for(var i = 1; i < table.rows.length;i++){
+	 		sumVal = sumVal + parseFloat(table.rows[i].cells[3].innerHTML);
+	 	}
+	 	document.getElementById("subtot").innerHTML = sumVal;
+	 	document.getElementById("subtot1").innerHTML = sumVal;
+ }
+
+
+    $(document).on("change keyup blur", "#chDiscount", function() {
+    	var table = document.getElementById("table"), sumVal = 0;
+	 	for(var i = 1; i < table.rows.length;i++){
+	 		sumVal = sumVal + parseFloat(table.rows[i].cells[3].innerHTML);
+	 	}
+        var main = sumVal;
+        var disc = $('#chDiscount').val();
+        var dec = (disc / 100).toFixed(2); 
+        var mult = main * dec; 
+        var discont = main - mult;
+        document.getElementById("result").innerHTML = discont;
+        document.getElementById("result1").innerHTML = discont;
+        document.getElementById("printdis").innerHTML = disc;
+    });
+
+    function function1(){
+        document.getElementById("modal1").style.display = 'block';
+    }
+    function function2(){
+        document.getElementById("modal2").style.display = 'block';
+    }
+    function function3(){
+        document.getElementById("modal3").style.display = 'block';
+    }
+    function function4(){
+        document.getElementById("modal4").style.display = 'block';
+    }
+    function function5(){
+        document.getElementById("container3").style.display = 'block';
+    }
+    function function6(){
+        document.getElementById("modal1").style.display = 'none';
+    }
+    function function7(){
+        document.getElementById("modal3").style.display = 'none';
+    }
+    function function8(){
+        document.getElementById("container3").style.display = 'none';
+    }
+    function function9(){
+        document.getElementById("modal2").style.display = 'none';
+    }
+    function function10(){
+        document.getElementById("modal3").style.display = 'none';
+    }
+    function function11(){
+        document.getElementById("display").style.display = 'block';
+    }
+    function function12(){
+        document.getElementById("display").style.display = 'none';
+    }
+
+    function function13(){
+        document.getElementById("modal4").style.display = 'none';
+    }
+    function function14(){
+        document.getElementById("display2").style.display = 'block';
+    }
+    function function15(){
+        document.getElementById("display2").style.display = 'none';
+    }
+</script>
 </body>
 </html>
