@@ -323,6 +323,16 @@ body {
 
     }
 
+	function deleterow(e)
+    {
+        total_cost = parseInt($(e).parent().parent().find('td:last').text(),10);
+        total -= total_cost;
+        $('#total').val(total);
+        $(e).parent().parent().remove();
+		
+
+
+    }
     
 
 
