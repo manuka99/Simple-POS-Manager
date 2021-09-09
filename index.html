@@ -1,0 +1,343 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+</head>
+
+<style>
+.vertical-menu {
+  width: 290px;
+  height: 500px;
+  overflow-y: auto;
+}
+
+.vertical-menu a {
+  background-color: #eee;
+  color: black;
+  display: block;
+  padding: 12px;
+  text-decoration: none;
+}
+
+.vertical-menu a:hover {
+  background-color: #ccc;
+}
+
+.vertical-menu a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+body {
+  background-image: url('images/back.jpeg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;  
+  background-size: cover;
+}
+</style>
+<body>
+<nav class="navbar navbar-dark bg-dark">
+
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Welcome to Food Quest</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Check Inventory</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Payments</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Salary Management</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Reports</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<br>
+<div class="row">
+
+    <div class="col-sm-3">
+
+        <div class="container">
+            <div class="list-group-item list-group-item-action active">Items</div>
+		<br>
+		<div class="search-container">
+    	<form action="/action_page.php">
+      	<input type="text" placeholder="Search.." name="search">
+      	<button type="submit" class="btn btn-warning">Submit</button>
+    	</form>
+  		</div>
+  
+        <div class="vertical-menu ,panel-body bg-dark" style="color: white">
+            
+            <form id="frm-project">
+                <div class="form-group">
+
+                    <div>
+                        <img src="images/chocolate-ice.jpg" id="ChocolateCookies " class="photo" width="100" height="100" data-toggle="modal" data-target="#exampleModal">
+                            <b>Chocolate Chips </b>
+                    </div>
+
+
+                    <div>
+                        <img src="images/mango.jpg" id="ChickenSubmarine" class="photo" width="100" height="100" data-toggle="modal" data-target="#exampleModal">
+                        <b>Chicken Submarine</b>
+                    </div>
+
+                    <div>
+                        <img src="images/venila.jpg" id="ChickenBurger" class="photo" width="100" height="100" data-toggle="modal" data-target="#exampleModal">
+                        <b>Chicken Burger</b>
+                    </div>
+
+                    <div>
+                        <img src="images/sww.jpg" id="ChickenShawarma" class="photo" width="100" height="100" data-toggle="modal" data-target="#exampleModal">
+                        <b>Chicken Shawarma</b>
+                    </div>
+                    
+                    <div>
+                        <img src="images/donut.jpg" id="ChocolateDonut" class="photo" width="100" height="100" data-toggle="modal" data-target="#exampleModal">
+                        <b>Chocolate Donut</b>
+                    </div>
+                    
+                    <div>
+                        <img src="images/shake.jpg" id="ChocolateOreoShake" class="photo" width="100" height="100" data-toggle="modal" data-target="#exampleModal">
+                        <b>Chocolate Oreo Shake</b>
+                    </div>
+                    
+                     <div>
+                        <img src="images/mojito.jpg" id="Mojito" class="photo" width="100" height="100" data-toggle="modal" data-target="#exampleModal">
+                        <b>Mojito</b>
+                    </div>
+                    
+                     <div>
+                        <img src="images/roll.jpg" id="RolledIceCream" class="photo" width="100" height="100" data-toggle="modal" data-target="#exampleModal">
+                        <b>Rolled Ice Cream</b>
+                    </div>
+                    <div>
+                        <img src="images/shake2.jpg" id="StawberryShake" class="photo" width="100" height="100" data-toggle="modal" data-target="#exampleModal">
+                        <b>Stawberry Shake</b>
+                    </div>
+                </div>
+            </form>
+        </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="container">
+            <div class="list-group-item list-group-item-action active">Add Products</div>
+            <table id="tbl-item" class="table table-dark table-bordered" cellpadding="0" cellspacing="0" width="100%" align="center">
+                <thead>
+
+                <tr>
+                    <th>Delete</th>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+
+                <tbody>
+
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+    <div class="col-sm-3">
+        <div class="list-group-item list-group-item-action active">Bill</div>
+        <div>
+            <label style=" background: white; font-size: 15px; ">Total Price (Rs.)</label>
+            <input type="text" style="color: yellow; background: black; font-size: 30px;" id="total" name="total" placeholder="Total" required>
+        </div>
+        </br>
+
+        <div>
+            <input type="button" class="btn btn-warning" value="Reset" name="Reset" id="reset">
+        </div>
+		<br>
+		<div>
+            <input type="button" class="btn btn-warning" value="Make Payment" name="Reset" id="reset">
+        </div>
+        
+       
+    </div>
+
+</div>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Quantity</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <input type="number" style="color: yellow; background: black; font-size: 30px;" id="qty" name="qty" placeholder="Select quantity" required>
+                </div>
+            </div>
+
+
+
+
+            <div class="modal-footer">
+                <input type="button" class="btn btn-info" value="Add" name="add" id="add" onclick="add()">
+                <!--<input type="button" class="btn btn-info" value="close" name="close" id="close" onclick="close()"> -->
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="component/jquery/jquery.js"></script>
+<script src="component/jquery/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+    var total = 0;
+    var tot = 0;
+
+    var item = null;
+    var price = 0;
+
+
+    var a = "";
+
+    $("img").on("click",function()
+        {
+
+            a = $(this).prop('id')
+
+        });
+
+
+    function add()
+    {
+        if(a == "ChocolateCookies")
+        {
+
+            item = "ChocolateCookies";
+            price = 32;
+
+
+        }
+        else if(a == "ChickenSubmarine")
+        {
+            item = "ChickenSubmarine";
+            price = 35;
+
+        }
+        else if(a == "ChickenBurger")
+        {
+            item = "ChickenBurger";
+            price = 40;
+
+        }
+        else if(a == "RolledIceCream")
+        {
+            item = "RolledIceCream";
+            price = 45;
+
+        }
+
+        else if(a == "ChocolateDonut")
+        {
+            item = "ChocolateDonut";
+            price = 35;
+
+        }
+
+        else if(a == "Mojito")
+        {
+            item = "Mojito";
+            price = 35;
+
+        }
+        
+        else if(a == "ChocolateOreoShake")
+        {
+            item = "ChocolateOreoShake";
+            price = 35;
+
+        }
+        
+        else if(a == "StawberryShake")
+        {
+            item = "StawberryShake";
+            price = 35;
+
+        }
+        var qty = $('#qty').val();
+        tot = qty * price;
+
+        var table1 =
+
+            "<tr>" +
+            "<td><button type='button' name='record' class='btn btn-warning' onclick='deleterow(this)'>Delete</td>" +
+            "<td>" + item    +  "</td>" +
+            "<td>" + price    +  "</td>" +
+
+            "<td>" + qty    +  "</td>" +
+
+            "<td>" + tot    +  "</td>" +
+
+            "</tr>" ;
+
+
+        total += Number(tot);
+        $('#total').val(total);
+
+
+        $("table tbody").append(table1);
+        $("exampleModal").modal('toggle');
+        $('#qty').val("1");
+
+
+
+
+    }
+
+	function deleterow(e)
+    {
+        total_cost = parseInt($(e).parent().parent().find('td:last').text(),10);
+        total -= total_cost;
+        $('#total').val(total);
+        $(e).parent().parent().remove();
+		
+
+
+    }
+    
+
+
+
+    $('#reset').click(function()
+    {
+        location.reload();
+    });
+
+
+</script>
+</body>
+</html>
