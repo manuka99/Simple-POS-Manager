@@ -363,12 +363,12 @@ to {
 														<!-- Summary -->
 														<p>
 															Initial Stocks: <strong><span
-																id="2totalNoStocks">500</span></strong>
+																id="2totalInitialNoStocks">500</span></strong>
 														</p>
 
 														<p>
 															Remaining Stocks: <strong><span
-																id="2totalNoStocks">180</span></strong>
+																id="2totalRemainingNoStocks">180</span></strong>
 														</p>
 
 														<!-- Change chart -->
@@ -568,7 +568,7 @@ to {
 
 												<label class="btn red accent-2 btn-md text-white"> <input
 													type="checkbox" name="options" id="option2"
-													autocomplete="off">Total initial Stock count <strong><span
+													autocomplete="off">Total Remaining Stock count <strong><span
 														id="totalCancellorders">180</span></strong> <i
 													class="fas fa-arrow-down ml-2 white-text"></i> <strong>
 												</strong>
@@ -767,15 +767,26 @@ to {
 								$
 										.ajax({
 
-											url : "/panel/product-statistics/stocks",
+											url : "/panel/product-statistics/stocks-a",
 											data : {
 												'year' : dataYear
 											},
 											success : function(dataSent) {
+												
+												var vals1 = dataSent[0][0];
 
 												$('#totalValueOfOrders').text(
-														"Rs." + 25800);
-												$('#totalNoStocks').text(560);
+														"Rs." + vals1[1]);
+												$('#totalNoStocks').text(vals1[0]);
+												
+												var vals2 = dataSent[1];
+												var chartData = Array(12).fill(0);
+												
+												for(var i = 0; i < vals2.length; ++i){
+													var chrtd = vals2[i];
+													chartData[chrtd[0]-1] = chrtd[1];												
+												}
+
 
 												var ctxL = document
 														.getElementById(
@@ -804,18 +815,7 @@ to {
 																	fillColor : "#fff",
 																	backgroundColor : 'rgba(255, 255, 255, .3)',
 																	borderColor : 'rgba(255, 255, 255)',
-																	data : [ 1,
-																			1,
-																			1,
-																			2,
-																			2,
-																			6,
-																			6,
-																			6,
-																			6,
-																			5,
-																			1,
-																			2 ],
+																	data : chartData,
 																} ]
 															},
 															options : {
@@ -889,15 +889,25 @@ to {
 								$
 										.ajax({
 
-											url : "/panel/product-statistics/stocks",
+											url : "/panel/product-statistics/stocks-b",
 											data : {
 												'year' : dataYear
 											},
 											success : function(dataSent) {
+												
+												var vals1 = dataSent[0][0];
 
-												$('#totalValueOfOrders').text(
-														"Rs." + 25800);
-												$('#totalNoStocks').text(560);
+												$('#2totalInitialNoStocks').text(
+														"Rs." + vals1[0]);
+												$('#2totalRemainingNoStocks').text(vals1[1]);
+												
+												var vals2 = dataSent[1];
+												var chartData = Array(12).fill(0);
+												
+												for(var i = 0; i < vals2.length; ++i){
+													var chrtd = vals2[i];
+													chartData[chrtd[0]-1] = chrtd[1] ? chrtd[1] : 0;												
+												}
 
 												var ctxL = document
 														.getElementById(
@@ -926,18 +936,7 @@ to {
 																	fillColor : "#fff",
 																	backgroundColor : 'rgba(255, 255, 255, .3)',
 																	borderColor : 'rgba(255, 255, 255)',
-																	data : [ 1,
-																			2,
-																			3,
-																			4,
-																			8,
-																			16,
-																			7,
-																			8,
-																			9,
-																			15,
-																			11,
-																			12 ],
+																	data : chartData,
 																} ]
 															},
 															options : {
@@ -989,23 +988,29 @@ to {
 								$
 										.ajax({
 
-											url : "/panel/product-statistics/stocks",
+											url : "/panel/product-statistics/stocks-c",
 											data : {
 												'year' : dataYear
 											},
 											success : function(dataSent) {
 
 												//var dataResponse = $.parseJSON(dataSent);
+												
+												var vals2 = dataSent[1];
+												var chartData = Array(12).fill(0);
+												var chartData1 = Array(12).fill(0);
+												
+												for(var i = 0; i < vals2.length; ++i){
+													var chrtd = vals2[i];
+													chartData[chrtd[0]-1] = chrtd[1];		
+													chartData1[chrtd[0]-1] = chrtd[2];		
+												}
 
-												var ordersCompleted = [ 2, 2,
-														5, 3, 8, 9, 7, 7, 6, 4,
-														5, 9 ];
+												var ordersCompleted = chartData;
 												var TotalsalesCompleted = 11800;
 												var totalCompleted = 500;
 
-												var ordersCancelled = [ 2, 1,
-														2, 1, 1, 6, 1, 2, 3, 3,
-														5, 6 ];
+												var ordersCancelled = chartData1;
 												var TotalsalesCancelled = 1180;
 												var totalCancelled = 180;
 
@@ -1097,18 +1102,20 @@ to {
 												document
 														.getElementById('ordwersColumns').innerHTML = s;
 
+												var vals1 = dataSent[0][0];
+												
 												$('#totalCSales')
 														.text(
 																" Rs."
-																		+ TotalsalesCompleted);
+																		+ vals1[0]);
 												$('#totalCorders').text(
-														" " + totalCompleted);
+														" " + vals1[1]);
 												$('#totalCancellSales')
 														.text(
 																" Rs."
-																		+ TotalsalesCancelled);
+																		+ vals1[2]);
 												$('#totalCancellorders').text(
-														" " + totalCancelled);
+														" " + vals1[3]);
 
 											}
 
