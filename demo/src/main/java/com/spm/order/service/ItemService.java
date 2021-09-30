@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spm.order.model.ItemEntity;
-import com.spm.order.repository.itemRepository;
+import com.spm.order.repository.ItemRepository;
 
 @Service
-public class itemService {
+public class ItemService {
 
 	@Autowired
-	itemRepository repository;
+	ItemRepository repository;
 	
 	public List<ItemEntity> getAllItems(){
 		List<ItemEntity> result = (List<ItemEntity>)repository.findAll();

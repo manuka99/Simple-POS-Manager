@@ -80,4 +80,40 @@ public class ProductServiceImpl implements ProductService {
 		return productRepository.getProductsBasedOnMonthsForYear(year);
 	}
 
+	@Override
+	public List<Object> getStockDifferenceBasedOnMonthsForYear(int year) {
+		// TODO Auto-generated method stub
+		return productRepository.getStockDifferenceBasedOnMonthsForYear(year);
+	}
+
+	@Override
+	public List<Object> getStockDifferentPercentageBasedOnMonthsForYear(int year) {
+		// TODO Auto-generated method stub
+		return productRepository.getStockDifferentPercentageBasedOnMonthsForYear(year);
+	}
+
+	@Override
+	public List<Object> getStockBasedOnMonthsForYear(int year) {
+		// TODO Auto-generated method stub
+		return productRepository.getStockBasedOnMonthsForYear(year);
+	}
+
+	@Override
+	public List<Object> getTotalAndValueStockForYear(int year) {
+		// TODO Auto-generated method stub
+		return productRepository.getTotalAndValueStockForYear(year);
+	}
+
+	@Override
+	public List<Object> getInitialAndRemainingStockForYear(int year) {
+		// TODO Auto-generated method stub
+		return productRepository.getInitialAndRemainingStockForYear(year);
+	}
+
+	@Override
+	public List<Object> getStockForYear(int year) {
+		// TODO Auto-generated method stub
+		return productRepository.getStockForYear(year);
+	}
+
 }

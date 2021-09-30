@@ -6,28 +6,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-import com.spm.order.model.Items;
-import com.spm.order.service.itemService;
+import com.spm.order.model.ItemEntity;
+import com.spm.order.service.ItemService;
 
 @Controller
-@RequestMapping("/purchaseOrder")
-public class item_Controller {
+@RequestMapping("/panel/orders")
+public class ItemController {
 	
 	@Autowired
-	private itemService itemService;
+	private ItemService itemService;
 	
-	@RequestMapping(path= "/createItem", method = RequestMethod.POST)
-	public String addItem(@ModelAttribute Items item) {
-		itemService.addItem(item);
+	@PostMapping("/createitem")
+	public String addItem(ItemEntity item) {
+		itemService.createOrUpdateItem(item);
 		return "redirect:/";
 	}
 	
 
-	@GetMapping("/purchaseOrder")
+	@GetMapping("/purchase")
 	public String purchaseOrder() {
-		return "add-order";
+		System.out.println("purchaseorder");
+		return "order/add-order";
 	}
 	
 

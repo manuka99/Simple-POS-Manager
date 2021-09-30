@@ -8,7 +8,7 @@ import com.spm.order.model.ItemEntity;
 
 
 @Repository
-public interface itemRepository extends JpaRepository<ItemEntity, Long> {
+public interface ItemRepository extends JpaRepository<ItemEntity, Long> {
 
 }
 
