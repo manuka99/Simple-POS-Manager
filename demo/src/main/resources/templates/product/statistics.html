@@ -237,7 +237,7 @@ to {
 																for="date-picker-example"></label>
 														</div>
 
-														<button class="btn btn-primary btn-md">
+														<button class="btn btn-primary btn-md" onclick="downloadFn1()">
 															<i class="fas fa-book fa-1x"></i> Generate Report
 														</button>
 													</div>
@@ -351,7 +351,7 @@ to {
 																for="date-picker-example"></label>
 														</div>
 
-														<button class="btn btn-primary btn-md">
+														<button class="btn btn-primary btn-md" onclick="downloadFn2()">
 															<i class="fas fa-book fa-1x"></i> Generate Report
 														</button>
 													</div>
@@ -374,7 +374,7 @@ to {
 														<!-- Change chart -->
 														<span class="min-chart my-4" id="chart-sales2"
 															data-percent="99"><span class="percent"></span></span>
-															
+
 														<h5>
 															<a class="badge green p-2"
 																onclick="orderChartManagement()">Update <i
@@ -500,7 +500,7 @@ to {
 								<!-- Card content -->
 								<div class="card-body card-body-cascade blue-panel text-center">
 
-									<button class="btn btn-success btn-md">
+									<button class="btn btn-success btn-md" onclick="downloadFn3()">
 										<i class="fas fa-book fa-1x"></i> Generate Detailed Report
 									</button>
 
@@ -731,6 +731,98 @@ to {
 							orderByTypeBar();
 							ordersCompletedeBar();
 							ordersProductsSaleBar();
+							
+							var dataset1 = Array(12).fill(0);
+							var dataset2 = Array(12).fill(0);
+							var dataset3 = Array(12).fill(0);
+							var dataset4 = Array(12).fill(0);
+							
+							function downloadFn1(){
+								const rows = [
+								    ["Month", "Stock Difference"],
+								    ["January", dataset1[0]],
+								    ["February", dataset1[1]],
+								    ["March", dataset1[2]],
+								    ["April", dataset1[3]],
+								    ["May", dataset1[4]],
+								    ["June", dataset1[5]],
+								    ["July", dataset1[6]],
+								    ["August", dataset1[7]],
+								    ["September", dataset1[8]],
+								    ["Octomber", dataset1[9]],
+								    ["November", dataset1[10]],
+								    ["December", dataset1[11]]
+								];
+
+								let csvContent = "data:text/csv;charset=utf-8," 
+								    + rows.map(e => e.join(",")).join("\n");
+								
+								var encodedUri = encodeURI(csvContent);
+								var link = document.createElement("a");
+								link.setAttribute("href", encodedUri);
+								link.setAttribute("download", "Stock Difference Per year based on month.csv");
+								document.body.appendChild(link); // Required for FF
+
+								link.click(); 
+							}
+							
+							function downloadFn2(){
+								const rows = [
+								    ["Month", "Stock Difference Percentage"],
+								    ["January", dataset2[0]],
+								    ["February", dataset2[1]],
+								    ["March", dataset2[2]],
+								    ["April", dataset2[3]],
+								    ["May", dataset2[4]],
+								    ["June", dataset2[5]],
+								    ["July", dataset2[6]],
+								    ["August", dataset2[7]],
+								    ["September", dataset2[8]],
+								    ["Octomber", dataset2[9]],
+								    ["November", dataset2[10]],
+								    ["December", dataset2[11]]
+								];
+
+								let csvContent = "data:text/csv;charset=utf-8," 
+								    + rows.map(e => e.join(",")).join("\n");
+								
+								var encodedUri = encodeURI(csvContent);
+								var link = document.createElement("a");
+								link.setAttribute("href", encodedUri);
+								link.setAttribute("download", "Stock Difference Percentage Per year based on month.csv");
+								document.body.appendChild(link); // Required for FF
+
+								link.click(); 
+							}
+							
+							function downloadFn3(){
+								const rows = [
+								    ["Month", "Total Stock", "Remaining Stocks"],
+								    ["January", dataset3[0], dataset4[0]],
+								    ["February", dataset3[1], dataset4[0]],
+								    ["March", dataset3[2], dataset4[0]],
+								    ["April", dataset3[3], dataset4[0]],
+								    ["May", dataset3[4], dataset4[0]],
+								    ["June", dataset3[5], dataset4[0]],
+								    ["July", dataset3[6], dataset4[0]],
+								    ["August", dataset3[7], dataset4[0]],
+								    ["September", dataset3[8], dataset4[0]],
+								    ["Octomber", dataset3[9], dataset4[0]],
+								    ["November", dataset3[10], dataset4[0]],
+								    ["December", dataset3[11], dataset4[0]]
+								];
+
+								let csvContent = "data:text/csv;charset=utf-8," 
+								    + rows.map(e => e.join(",")).join("\n");
+								
+								var encodedUri = encodeURI(csvContent);
+								var link = document.createElement("a");
+								link.setAttribute("href", encodedUri);
+								link.setAttribute("download", "Stock Data based on month.csv");
+								document.body.appendChild(link); // Required for FF
+
+								link.click(); 
+							}
 
 							function orderChartManagement() {
 
@@ -787,7 +879,8 @@ to {
 													chartData[chrtd[0]-1] = chrtd[1];												
 												}
 
-
+												dataset1 = chartData;
+												
 												var ctxL = document
 														.getElementById(
 																"lineChart")
@@ -909,6 +1002,8 @@ to {
 													chartData[chrtd[0]-1] = chrtd[1] ? chrtd[1] : 0;												
 												}
 
+												dataset2 = chartData;
+												
 												var ctxL = document
 														.getElementById(
 																"lineChart22")
@@ -1005,6 +1100,9 @@ to {
 													chartData[chrtd[0]-1] = chrtd[1];		
 													chartData1[chrtd[0]-1] = chrtd[2];		
 												}
+												
+												dataset3 = chartData;
+												dataset4 = chartData1;
 
 												var ordersCompleted = chartData;
 												var TotalsalesCompleted = 11800;
