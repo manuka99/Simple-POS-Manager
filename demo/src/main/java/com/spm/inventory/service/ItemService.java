@@ -1,12 +1,12 @@
-package com.spm.order.service;
+package com.spm.inventory.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spm.order.model.ItemEntity;
-import com.spm.order.repository.ItemRepository;
+import com.spm.inventory.model.ItemEntity;
+import com.spm.inventory.repository.ItemRepository;
 
 @Service
 public class ItemService {
@@ -48,4 +48,13 @@ public class ItemService {
 	    		e.printStackTrace();
 	    	}
 	    }
+	    
+	    public void deleteAll() {
+	    	try {
+	    		repository.deleteAll();
+	    	}catch(Exception e) {
+	    		e.printStackTrace();
+	    	}
+	    }
+	     
 	}

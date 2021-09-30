@@ -1,4 +1,6 @@
-package com.spm.order.model;
+package com.spm.inventory.model;
+
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,9 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
@@ -33,13 +35,23 @@ public class ItemEntity {
     @Column(name="tot")
     private float tot;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name="orderID")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private orderEntity order;
-
 	public long getId() {
 		return id;
+	}
+	
+	@ManyToMany
+	@JoinTable(
+			name="item_order",
+			joinColumns = @JoinColumn(name="itemid"),
+			inverseJoinColumns = @JoinColumn(name="OrderId"))
+	Set<OrderEntity> order;
+	
+	public Set<OrderEntity> getOrder() {
+		return order;
+	}
+
+	public void setOrder(Set<OrderEntity> order) {
+		this.order = order;
 	}
 
 	public void setId(long id) {
@@ -78,13 +90,5 @@ public class ItemEntity {
 		return uprice * qty;
 	}
 	
-    
-	public orderEntity getOrder() {
-		return order;
-	}
-
-	public void setOrder(orderEntity order) {
-		this.order = order;
-	}
 
 }
