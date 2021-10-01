@@ -1,0 +1,50 @@
+package com.example.foodqueue.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.example.foodqueue.domain.Food;
+import com.example.foodqueue.service.FoodService;
+
+public class FoodController {
+@RestController
+@RequestMapping("Student")
+public class StudentController {
+
+	 @Autowired
+	    private FoodService service;
+
+	    @RequestMapping(value = "/save", method = RequestMethod.POST)
+	    public String saveStudent(@ModelAttribute("student") Food std) {
+	        service.save(std);
+	        return "{\"status\":\"success\"}";
+	    }
+
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	    public List<Food> listStudents() {
+	        List<Food> liststudent = service.listAll();
+	        return liststudent;
+	    }
+
+	    @RequestMapping("/edit/{id}")
+	    public ModelAndView showEditStudentPage(@PathVariable(name = "id") int id) {
+	        ModelAndView mav = new ModelAndView("new");
+	        Food std = service.get(id);
+	        mav.addObject("student", std);
+	        return mav;
+
+	    }
+	    @RequestMapping("/delete/{id}")
+	    public String deletestudent(@PathVariable(name = "id") int id) {
+	        service.delete(id);
+	        return "redirect:/";
+	    }
+}
+}
