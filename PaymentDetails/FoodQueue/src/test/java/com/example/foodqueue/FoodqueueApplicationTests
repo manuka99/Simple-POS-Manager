@@ -1,0 +1,13 @@
+package com.example.foodqueue;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class FoodqueueApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
