@@ -1,3 +1,8 @@
+/*
+ * IT19152288
+ * Bandara M.H.M.N.D.T.
+ */
+
 package com.spm.inventory.controller;
 
 import java.util.List;
@@ -23,7 +28,7 @@ public class ItemController {
 	public String getAllItems(Model model) {
 		List<ItemEntity> list = service.getAllItems();
 		model.addAttribute("items", list);
-		return "list-item";
+		return "order/list-items";
 	}
 	
 	@RequestMapping(path = {"/edit"})

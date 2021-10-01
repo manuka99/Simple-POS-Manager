@@ -1,3 +1,8 @@
+/*
+ * IT19152288
+ * Bandara M.H.M.N.D.T.
+ */
+
 package com.spm.inventory.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;

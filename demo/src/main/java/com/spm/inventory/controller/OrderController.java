@@ -1,3 +1,8 @@
+/*
+ * IT19152288
+ * Bandara M.H.M.N.D.T.
+ */
+
 package com.spm.inventory.controller;
 
 
@@ -22,6 +27,12 @@ public class OrderController {
 	@Autowired
 	OrderService oservice;
 	
+	public String getAllOrders(Model model) {
+		List<OrderEntity> list = oservice.getAllOrders();
+		model.addAttribute("orders", list);
+		return "list-item";
+	}
+	
 	@RequestMapping(path= "/createOrder", method = RequestMethod.POST)
 	public String createOrUpdateOrder(OrderEntity order) {
 		oservice.createOrUpdateOrder(order);
@@ -29,5 +40,11 @@ public class OrderController {
 	}
 	
 
+	@GetMapping("/deleteAllOrders")
+	public String deleteAll(){
+		oservice.deleteAll();
+		return "report";
+	}
+	
 
 }
