@@ -19,11 +19,11 @@ public class ItemController {
 	@Autowired
 	ItemService service;
 	
-	@GetMapping("/")
+	@GetMapping
 	public String getAllItems(Model model) {
 		List<ItemEntity> list = service.getAllItems();
 		model.addAttribute("items", list);
-		return "list-item";
+		return "order/list-item";
 	}
 	
 	@RequestMapping(path = {"/edit"})
