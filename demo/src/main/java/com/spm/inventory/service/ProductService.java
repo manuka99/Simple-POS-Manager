@@ -19,4 +19,20 @@ public interface ProductService {
 	boolean deleteProductById(String id);
 	
 	List<Object> getProductsBasedOnMonths(int year);
+
+	List<Object> getTotalAndValueStockForYear(int year);
+	
+	List<Object> getStockDifferenceBasedOnMonthsForYear(int year);
+	
+//	---------------
+	
+	List<Object> getInitialAndRemainingStockForYear(int year);
+	
+	List<Object> getStockDifferentPercentageBasedOnMonthsForYear(int year);
+	
+//	-----------
+	
+	List<Object> getStockForYear(int year);
+	
+	List<Object> getStockBasedOnMonthsForYear(int year);
 }

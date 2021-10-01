@@ -290,7 +290,7 @@
 																	<div id="addNewCategoryOption">
 																		<select id="AddNewProductCategorySelect"
 																			class="browser-default custom-select" required>
-																			<option>Select Category..</option>
+																			<option value="0">Select Category..</option>
 
 																			<option th:each="categoryList : ${categories}"
 																				th:value="${categoryList.categoryID}">[[${categoryList.name}]]</option>
@@ -306,7 +306,7 @@
 																	<button type="button" id="hidden-cancel"
 																		class="btn btn-secondary" data-dismiss="modal">Close</button>
 																	<button type="button" id="hidden-cancel"
-																		class="btn btn-secondary" data-dismiss="modal">Reset
+																		class="btn btn-secondary" onclick="resetForm()">Reset
 																		Form</button>
 																	<button class="btn btn-primary" type="submit">Add
 																		new product</button>
@@ -381,6 +381,17 @@
 					+ '<div style="height: 10px;"></div>' + '</div>';
 
 			var catergoryID = $('#catID').val();
+			
+			function resetForm(){
+				$('#AddNewproductName').val("");
+				$('#AddNewproductDescription').val("");
+				$('#AddNewproductPortion').val("");
+				$('#AddNewproductPrice').val("");
+				$('#AddNewproductDate').val("");
+				$('#AddNewproductTax').val("");
+				//$("#AddNewProductCategorySelect").val("true");
+				//$("#addNewProductStatusSelect").val("0");
+};
 
 			function listFoodByCategory() {
 				$('#loaderTable').slideDown();
@@ -469,8 +480,10 @@
 					//Validation failed
 					else if (this.status == 400) {
 						$('#addProductError').append(addProductErrorMsg);
-						alert(this.response);
+						//alert(this.response);
 					}
+					
+					document.querySelector('#progress').innerHTML = "";
 				};
 
 				request.upload.addEventListener('progress', function(e) {
@@ -481,7 +494,7 @@
 
 				request.open('POST', '/panel/products', true);
 				//request.setRequestHeader("Content-Type", "multipart/form-data");
-				request.timeout = 2000;
+				request.timeout = 20000;
 				request.ontimeout = function() {
 					$('#addProductError').append(connectError);
 				}

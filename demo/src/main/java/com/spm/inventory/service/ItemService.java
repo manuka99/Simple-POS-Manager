@@ -1,18 +1,18 @@
-package com.spm.order.service;
+package com.spm.inventory.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spm.order.model.ItemEntity;
-import com.spm.order.repository.itemRepository;
+import com.spm.inventory.model.ItemEntity;
+import com.spm.inventory.repository.ItemRepository;
 
 @Service
-public class itemService {
+public class ItemService {
 
 	@Autowired
-	itemRepository repository;
+	ItemRepository repository;
 	
 	public List<ItemEntity> getAllItems(){
 		List<ItemEntity> result = (List<ItemEntity>)repository.findAll();
@@ -48,4 +48,13 @@ public class itemService {
 	    		e.printStackTrace();
 	    	}
 	    }
+	    
+	    public void deleteAll() {
+	    	try {
+	    		repository.deleteAll();
+	    	}catch(Exception e) {
+	    		e.printStackTrace();
+	    	}
+	    }
+	     
 	}

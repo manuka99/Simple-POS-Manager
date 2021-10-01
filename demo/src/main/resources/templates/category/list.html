@@ -191,7 +191,7 @@
 																	<button type="button" class="btn btn-secondary"
 																		data-dismiss="modal">Close</button>
 																	<button type="button" class="btn btn-secondary"
-																		data-dismiss="modal">Reset form</button>
+																		onclick="resetForm()">Reset form</button>
 																	<button class="btn btn-primary"
 																		onclick="AddNewCategory()">Save Category</button>
 																</div>
@@ -280,7 +280,7 @@
 																	<button type="button" class="btn btn-secondary"
 																		data-dismiss="modal">Close</button>
 																	<button type="button" class="btn btn-secondary"
-																		data-dismiss="modal">Clear data</button>
+																		onclick="resetForm()">Clear data</button>
 																	<button class="btn btn-primary"
 																		onclick="updateCategory()">Update Category</button>
 																</div>
@@ -384,6 +384,11 @@
 						+ '</button>'
 						+ '<div style="height: 10px;"></div>'
 						+ '</div>';
+						
+			function resetForm(){
+							$('#addName').val("");
+							$('#addDescription').val("");
+			};
 
 				function AddNewCategory() {
 
