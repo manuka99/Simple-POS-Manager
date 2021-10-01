@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+ 
+</head>
+<body>
+ 
+<nav class="navbar navbar-dark bg-dark">
+ 
+    <span class="navbar-brand mb-0 h1">ICECREAM SHOP POS</span>
+ 
+</nav>
+
+	</br>
+
+
+	<div class = "container">
+		<div class= "row">
+			<div class = "col-sn-4">
+				<form id="frmFood" name="frmFood">
+				
+					<div class="form-group" align="left">
+						<label>Cashier's Name:</label>
+						<input type="text" id="cashname" name="cashname" placeholder = "Enter Name">
+					</div>
+					
+					<div class="form-group" align="left">
+						<label>Date:</label>
+						<input type="text" id="date" name="date" placeholder = "Enter date">
+					</div>
+					
+					<div class="form-group" align="left">
+						<label>Amount:</label>
+						<input type="text" id="fee" name="fee" placeholder = "Enter amount">
+					</div>
+					
+					<div class="form-group" align="left">
+						<button type="button" class="btn btn-success" id="save" onclick= "addRecord()">Add</button>
+						<button type="button" class="btn btn-success" id="save" onclick= "reSet()">Rest</button>
+					</div>
+					
+				</form>
+		</div>
+		
+		<div class="col-sm-8">
+			<div class="panel-body">
+				<table id="tbl-food" class= "table=bordered" cellpadding="0" cellspacing="0">
+					<thead>
+						<tr><th>Cashier's Name</th><th>Date</th><th>Amount</th><th>Edit</th><th>Delete</th></tr>
+					</thead>
+				</table>
+			</div>
+		</div>
+		
+		</div>
+	</div>
+	
+	<script src="component/jquery.validate.min.js" type="text/javascript"></script>
+	<script type="component/DataTables/datatables.min.js" type="text/javascript"></script>
+	
+	
+	<script>
+		var isNew = true;
+		var studid = null;
+		getall();
+		
+		function addRecord()
+		{
+			
+			if($ ("frmFood").valid())
+				{
+					var url ="";
+					var data="";
+					var method;
+				}
+			
+			if(isNew == true)
+				{
+					url = '[[ ${@environment.getProperty('api.base.path;') }]] /Food/save';
+					data = $("#frmFood").serialize();
+					method = 'POST'
+				}
+			
+			else{
+				
+				url='editrecord.jsp';
+				data = $("#frmFood").serialize() + "&foodid" + foodid;
+				method = 'POST'
+			}
+			
+			$.ajax ({
+				type : method,
+				url: url,
+				dataType: "JSON",
+				data : data,
+				
+				success:function(data){
+					$('#name').val("");
+					$('#amount').val("");
+					$('#date').val("");
+					console.log(data);
+					getall();
+					
+					if(data.status == "success")
+						{
+						 	alert("Record Added");
+						}
+					else
+						{
+							alert("Error");
+						}
+				}
+			});
+		}
+		
+function getall()
+	$('#tbl-sales').dataTable(). fnDestroy();
+	$.ajax({
+		
+		url : "[[${ @environment.getProperty('api.base.path')} ]] /Food/list",
+		type: "GET",
+		dateType: "JSON",
+		success:function(data)
+		{
+			$("$tbl-sales").dataTable({
+				"data" : data,
+				"coloumns" : [
+					{data: 'name'},
+					{data: 'date'},
+					{data: 'amount'},
+					{
+						data: null,
+						render: function(data, type, full, meta)
+						{
+							return'<button class="btn btn-success" onclick = "get_details('+ data.id +')"> Edit</button>';
+						}
+					},
+					
+					{
+						data:null,
+						render : function(data, type, full, meta)
+						{
+							return '<button class="btn btn-danger" onclick ="get_Delete('+ data.id +')"> Delete </button>';
+						}
+					}
+				]
+			});
+			
+		}
+	});
+	
+	
+function get_details(id)
+{
+	$.ajax({
+		
+		type: "POST",
+		url: "edit_return.jsp",
+		data:{"id" : id},
+		
+		success:function(data)
+		{
+			isNew = false
+			var obj = JSON.parse(data);
+			id = obj[0].id
+			$('name').val(obj[0].stname);
+			$('date').val(obj[0].date);
+			$('amount').val(obj[0].amount);
+			
+		}
+		
+	});	
+}
+
+
+	
+	
+	</script>
+
+<footer class="footers" th:replace="/fragments/footer :: footer">
+
+</body>
+</html>

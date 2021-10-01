@@ -1,0 +1,32 @@
+package com.example.foodqueue.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.foodqueue.domain.Food;
+import com.example.foodqueue.repository.FoodRepository;
+
+@Service
+public class FoodService {	
+	@Autowired
+    private FoodRepository repo;
+	
+	public List<Food> listAll() {
+        return repo.findAll();
+    }
+     
+    public void save(Food std) {
+        repo.save(std);
+    }
+     
+    public Food get(long id) {
+        return repo.findById(id).get();
+    }
+     
+    public void delete(long id) {
+        repo.deleteById(id);
+    }
+    
+}
