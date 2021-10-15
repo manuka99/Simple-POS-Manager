@@ -27,9 +27,9 @@ Name                            Registration No
 ## How To get started with app
 
 ### Prerequisites
-1.
-2.
-3.
+1.Java 8 or above
+2.Maven
+3.Tomcat server
 
 ### Prcedure of Setting up prerequisties and run the project
 1.
