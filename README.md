@@ -33,11 +33,11 @@ Name                            Registration No
 4.Springtool suit, Intelj IDE or Eclipse <br>
 
 ### Prcedure of Setting up prerequisties and run the project
-1. Download Java Jdk and specify the path on environmental variable.
-2.download JDk.
-3.Download the IDE (Eclipse, STS, etc.)
-4.Download and unzip the source code from git url.
-2.Import the project into IDE.
-3.Run the application.
-4.open the internet browser and enter the http://localhost:8085 url
+1. Download Java Jdk and specify the path on environmental variable. <br>
+2.download JDk.<br>
+3.Download the IDE (Eclipse, STS, etc.)<br>
+4.Download and unzip the source code from git url.<br>
+2.Import the project into IDE.<br>
+3.Run the application.<br>
+4.open the internet browser and enter the http://localhost:8085 url.<br>
 
