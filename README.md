@@ -39,5 +39,5 @@ Name                            Registration No
 4.Download and unzip the source code from git url.
 2.Import the project into IDE.
 3.Run the application.
-4.open the internet browser and enter the http://localhost:8085 url.
+4.open the internet browser and enter the http://localhost:8085 url
 
