@@ -27,10 +27,10 @@ Name                            Registration No
 ## How To get started with app
 
 ### Prerequisites
-1.Java 8 or above
-2.Maven
-3.Tomcat server
-4.Springtool suit, Intelj IDE or Eclipse
+1.Java 8 or above <br>
+2.Maven <br>
+3.Tomcat server <br>
+4.Springtool suit, Intelj IDE or Eclipse <br>
 
 ### Prcedure of Setting up prerequisties and run the project
 1. Download Java Jdk and specify the path on environmental variable.
