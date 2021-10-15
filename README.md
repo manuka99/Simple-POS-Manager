@@ -30,9 +30,11 @@ Name                            Registration No
 1.Java 8 or above
 2.Maven
 3.Tomcat server
+4.Springtool suit or Intelj IDE
 
 ### Prcedure of Setting up prerequisties and run the project
-1.
-2.
-3.
+1. Download Java Jdk and specify the path on environmental variable.
+Download and unzip the source code
+2.Import the project into IDE
+3.Run the application 
 
